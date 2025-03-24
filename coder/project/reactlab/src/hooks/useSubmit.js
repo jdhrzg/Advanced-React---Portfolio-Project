@@ -11,7 +11,7 @@ const useSubmit = () =>
   const [isLoading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
 
-  const submit = async (url, data) =>
+  const submit = async (data) =>
   {
     const random = Math.random();
     setLoading(true);
@@ -20,22 +20,18 @@ const useSubmit = () =>
       await wait(2000);
       if (random < 0.5)
       {
-        console.log("throw error");
         throw new Error("Something went wrong");
       }
-      console.log("set response success");
       setResponse({
         type: 'success',
         message: `Thanks for your submission ${data.firstName}, we will get back to you shortly!`,
       })
     } catch (error)
     {
-      console.log("set response error");
       setResponse({
         type: 'error',
         message: 'Something went wrong, please try again later!',
       })
-      console.log(response)
     } finally
     {
       setLoading(false);

@@ -44,18 +44,24 @@ const LandingSection = () =>
     }),
     onSubmit: async (values, { resetForm }) =>
     {
-      const response = await submit(values);
-      console.log(response)
+      await submit(values);
+    },
+  });
+
+  useEffect(() =>
+  {
+    if (response)
+    {
       if (response.type === "success")
       {
-        onOpen("success", `Thank you, ${values.firstName}! Your form was submitted successfully.`);
-        resetForm();
+        onOpen("success", `Thank you, ${formik.values.firstName}! Your form was submitted successfully.`);
+        formik.resetForm();
       } else
       {
         onOpen("error", "Form submission failed. Please try again.");
       }
-    },
-  });
+    }
+  }, [response]);
 
   return (
     <FullScreenSection
